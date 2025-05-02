@@ -24,14 +24,6 @@ public class ApiResponse<T> {
                 .build();
     }
 
-    public static ApiResponse<String> fail(ErrorCode code, String msg){
-        return ApiResponse.<String>builder()
-                .success(false)
-                .code(code.getCode())
-                .data(msg)
-                .build();
-    }
-
     public static<T> ApiResponse<T> fail(ErrorCode code, T data){
         return ApiResponse.<T>builder()
                 .success(false)

@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Getter
 public enum SuccessCode implements ApiCode{
-    Ok(200000), Empty(2000001);
+    OK(200000), DATA_EMPTY(2000001);
 
     private final int code;
 }
