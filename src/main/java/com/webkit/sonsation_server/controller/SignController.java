@@ -28,7 +28,7 @@ public class SignController {
         return signService.searchSigns(keyword);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/name")
     public ApiResponse<List<String>> getAllSignNames(){
         return signService.getAllSignNames();
     }
