@@ -16,16 +16,13 @@ import java.util.List;
 public class SignController {
     private final SignService signService;
 
-    @GetMapping
-    public ApiResponse<List<SignListItem>> getAllSigns(){
-        return signService.getAllSigns();
-    }
-
-    @GetMapping
-    public ApiResponse<List<SignListDetail>> searchSigns(
-            @RequestParam(value = "keyword", defaultValue = "") String keyword
-    ){
-        return signService.searchSigns(keyword);
+    @GetMapping("/api/sign")
+    public ApiResponse<?> getSigns(@RequestParam(required = false) String keyword) {
+        if (keyword == null || keyword.isBlank()) {
+            return signService.getAllSigns();
+        } else {
+            return signService.searchSigns(keyword);
+        }
     }
 
     @GetMapping("/name")
