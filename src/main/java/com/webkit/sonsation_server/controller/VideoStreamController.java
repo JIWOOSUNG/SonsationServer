@@ -19,19 +19,20 @@ public class VideoStreamController {
     private final List<String> timeline = new ArrayList<>();
     private long lastElapsed = 0L;
 
+    // 영상 스트리밍 API
     @GetMapping("/{filename}")
     public ResponseEntity<StreamingResponseBody> streamVideo(@PathVariable String filename) {
         FTPClient ftpClient = new FTPClient();
 
         try {
             System.out.println("▶ FTP 연결 시도...");
-            ftpClient.connect("127.0.0.1", 21);
-            ftpClient.login("testuser", "testpass");
+            ftpClient.connect("127.0.0.1", 21); // FTP 서버
+            ftpClient.login("testuser", "testpass"); // 로그인 정보
             ftpClient.enterLocalPassiveMode();
             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
             System.out.println("✅ FTP 로그인 및 설정 완료");
 
-            String remoteFilePath = "/videos/" + filename;
+            String remoteFilePath = "/videos/" + filename; // 파일 경로 (FTP 서버)
             System.out.println("▶ FTP 경로 요청: " + remoteFilePath);
 
             InputStream inputStream = ftpClient.retrieveFileStream(remoteFilePath);
@@ -73,7 +74,7 @@ public class VideoStreamController {
         }
     }
 
-    // ✅ 실시간 통계 API
+    // 실시간 스트리밍 통계 API
     record StreamStats(long lastElapsed, double averageElapsed, long maxElapsed, long minElapsed, long totalElapsed, List<String> timeline) {}
 
     @GetMapping("/stats")
