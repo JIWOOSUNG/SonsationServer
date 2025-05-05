@@ -2,6 +2,7 @@ package com.webkit.sonsation_server.controller;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
@@ -18,6 +19,18 @@ public class VideoStreamController {
     private final List<Long> elapsedList = new ArrayList<>();
     private final List<String> timeline = new ArrayList<>();
     private long lastElapsed = 0L;
+
+    @Value("${FTP_HOST}")
+    private String ftpHost;
+
+    @Value("${FTP_PORT}")
+    private int ftpPort;
+
+    @Value("${FTP_USER}")
+    private String ftpUser;
+
+    @Value("${FTP_PASS}")
+    private String ftpPass;
 
     // 영상 스트리밍 API
     @GetMapping("/{filename}")
