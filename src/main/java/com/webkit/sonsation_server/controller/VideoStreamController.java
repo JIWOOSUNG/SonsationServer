@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/stream")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "*")
 public class VideoStreamController {
 
     private final List<Long> elapsedList = new ArrayList<>();
@@ -77,8 +77,10 @@ public class VideoStreamController {
                 }
             };
 
+            String contentType = filename.endsWith(".webm") ? "video/webm" : "video/mp4";
+
             return ResponseEntity.ok()
-                    .contentType(MediaType.valueOf("video/mp4"))
+                    .contentType(MediaType.valueOf(contentType))
                     .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + filename + "\"")
                     .body(body);
 
