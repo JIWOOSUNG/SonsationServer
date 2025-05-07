@@ -8,6 +8,7 @@ import com.webkit.sonsation_server.model.Sign;
 import com.webkit.sonsation_server.repository.CategoryRepository;
 import com.webkit.sonsation_server.repository.SignRepository;
 import com.webkit.sonsation_server.response.ApiResponse;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,7 +50,8 @@ public class SignService {
     }
 
     public SignDetail getSign(Long id) {
-        Sign sign = signRepository.findById(id).orElse(null);
+        Sign sign = signRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("해당 수어가 존재하지 않습니다: id = " + id));
 
         return SignDetail.toDetail(sign);
     }
