@@ -4,6 +4,7 @@ import com.webkit.sonsation_server.mapper.SignDetail;
 import com.webkit.sonsation_server.mapper.SignListDetail;
 import com.webkit.sonsation_server.mapper.SignListItem;
 import com.webkit.sonsation_server.model.Category;
+import com.webkit.sonsation_server.model.Sign;
 import com.webkit.sonsation_server.repository.CategoryRepository;
 import com.webkit.sonsation_server.repository.SignRepository;
 import com.webkit.sonsation_server.response.ApiResponse;
@@ -23,21 +24,28 @@ public class SignService {
 
 
     public List<SignListItem> getAllSigns() {
-        List<Category> categories = categoryRepository.findAll();
-        List<SignListDetail> items = new ArrayList<>();
-        List<SignListItem> signListItems = new ArrayList<>();
+        List<Category> categories = categoryRepository.findAllWithSigns();
 
-
-
-        return null;
+        return categories.stream()
+                .map(category -> {
+                    List<SignListDetail> items = category.getSigns().stream()
+                            .map(sign -> SignListDetail.toListDetail(sign.getName(), sign.getUrl()))
+                            .toList();
+                    return SignListItem.toListItem(category.getName(), items);
+                })
+                .toList();
     }
 
     public List<SignListDetail> searchSigns(String keyword) {
-        return null;
+        List<Sign> signs = signRepository.findByNameContaining(keyword);
+
+        return signs.stream().map(
+                sign -> SignListDetail.toListDetail(sign.getName(), sign.getUrl())
+        ).toList();
     }
 
     public List<String> getAllSignNames() {
-        return null;
+        return signRepository.findAllNames();
     }
 
     public SignDetail getSign(Long id) {

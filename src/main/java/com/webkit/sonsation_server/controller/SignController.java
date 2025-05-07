@@ -17,16 +17,19 @@ import java.util.List;
 public class SignController {
     private final SignService signService;
 
-    @GetMapping("/api/sign")
+    @GetMapping
     public ApiResponse<?> getSigns(@RequestParam(required = false) String keyword) {
         try {
             List<?> listItems =  keyword == null || keyword.isBlank()
                     ? signService.getAllSigns()
                     : signService.searchSigns(keyword);
 
-            // TODO : listItems가 비어있는 경우 SuccessCode.DATA_EMPTY 사용
-
-            return ApiResponse.success(SuccessCode.OK, listItems);
+            return ApiResponse.success(
+                    listItems.isEmpty()
+                            ? SuccessCode.DATA_EMPTY
+                            : SuccessCode.OK,
+                    listItems
+            );
         } catch (Exception e) {
             // TODO : 에러 발생 시 ApiResponse.fail()로 반환
             throw new RuntimeException(e);
