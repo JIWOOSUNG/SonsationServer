@@ -1,10 +1,11 @@
 package com.webkit.sonsation_server.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SignListItem {
     private String category;
-    private List<SignListDetail> items;
+    private List<SignListDetail> items = new ArrayList<>();
 
 
     // TODO : 더 추가할 항목있는지 논의
