@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/stream")
+@CrossOrigin(origins = "http://localhost:5173")
 public class VideoStreamController {
 
     private final List<Long> elapsedList = new ArrayList<>();
@@ -39,8 +40,8 @@ public class VideoStreamController {
 
         try {
             System.out.println("▶ FTP 연결 시도...");
-            ftpClient.connect("127.0.0.1", 21); // FTP 서버
-            ftpClient.login("testuser", "testpass"); // 로그인 정보
+            ftpClient.connect(ftpHost, ftpPort); // FTP 서버
+            ftpClient.login(ftpUser, ftpPass); // 로그인 정보
             ftpClient.enterLocalPassiveMode();
             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
             System.out.println("✅ FTP 로그인 및 설정 완료");

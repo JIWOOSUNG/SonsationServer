@@ -13,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/sign")
+@CrossOrigin(origins = "http://localhost:5173")
 public class SignController {
     private final SignService signService;
 
@@ -56,5 +57,5 @@ public class SignController {
         } catch (Exception e) {
             return ApiResponse.fail(ErrorCode.SERVER_ERROR, e.getMessage());
         }
-    }
+    } //
 }
