@@ -11,11 +11,13 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 public class SignListDetail {
+    private Long id;
     private String name;
     private String url;
 
     public static SignListDetail toListDetail(Sign sign){
         return SignListDetail.builder()
+                .id(sign.getId())
                 .name(sign.getName())
                 .url(sign.getUrl())
                 .build();
