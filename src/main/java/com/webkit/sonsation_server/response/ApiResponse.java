@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.HashMap;
+import java.util.Map;
 
 @Data
 @NoArgsConstructor
@@ -14,7 +16,6 @@ import lombok.NoArgsConstructor;
 public class ApiResponse<T> {
     private boolean success;
     private int code;
-    private String message;  // 실패 응답 전용 메세지
     private T data;
 
     public static <T> ApiResponse<T> success(SuccessCode code, T data) {
@@ -26,11 +27,13 @@ public class ApiResponse<T> {
     }
 
     public static <T> ApiResponse<T> fail(ErrorCode code, String detailMessage) {
+        Map<String, String> errorData = new HashMap<>();
+        errorData.put("message", code.getMessage() + (detailMessage != null ? ": " + detailMessage : ""));
+
         return ApiResponse.<T>builder()
                 .success(false)
                 .code(code.getCode())
-                .message(code.getMessage() + (detailMessage != null ? ": " + detailMessage : ""))
-                .data(null)
+                .data((T) errorData)
                 .build();
     }
 }
