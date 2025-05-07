@@ -31,8 +31,7 @@ public class SignController {
                     listItems
             );
         } catch (Exception e) {
-            // TODO : 에러 발생 시 ApiResponse.fail()로 반환
-            throw new RuntimeException(e);
+            return ApiResponse.fail(ErrorCode.INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
 
@@ -43,8 +42,7 @@ public class SignController {
 
             return ApiResponse.success(SuccessCode.OK, signNames);
         } catch (Exception e) {
-            // TODO : 에러 발생 시 ApiResponse.fail()로 반환
-            throw new RuntimeException(e);
+            return ApiResponse.fail(ErrorCode.INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
 
@@ -57,8 +55,7 @@ public class SignController {
 
             return ApiResponse.success(SuccessCode.OK, signDetail);
         } catch (Exception e) {
-            // TODO : 에러 발생 시 ApiResponse.fail()로 반환
-            throw new RuntimeException(e);
+            return ApiResponse.fail(ErrorCode.INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
 }
