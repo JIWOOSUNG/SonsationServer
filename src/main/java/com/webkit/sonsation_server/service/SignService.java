@@ -29,7 +29,7 @@ public class SignService {
         return categories.stream()
                 .map(category -> {
                     List<SignListDetail> items = category.getSigns().stream()
-                            .map(sign -> SignListDetail.toListDetail(sign.getName(), sign.getUrl()))
+                            .map(sign -> SignListDetail.toListDetail(sign))
                             .toList();
                     return SignListItem.toListItem(category.getName(), items);
                 })
@@ -40,7 +40,7 @@ public class SignService {
         List<Sign> signs = signRepository.findByNameContaining(keyword);
 
         return signs.stream().map(
-                sign -> SignListDetail.toListDetail(sign.getName(), sign.getUrl())
+                sign -> SignListDetail.toListDetail(sign)
         ).toList();
     }
 
@@ -49,6 +49,8 @@ public class SignService {
     }
 
     public SignDetail getSign(Long id) {
-        return null;
+        Sign sign = signRepository.findById(id).orElse(null);
+
+        return SignDetail.toDetail(sign);
     }
 }

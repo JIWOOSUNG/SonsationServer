@@ -1,5 +1,6 @@
 package com.webkit.sonsation_server.mapper;
 
+import com.webkit.sonsation_server.model.Sign;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,11 +14,11 @@ public class SignDetail {
     private String url;
 
     // Sign -> SignDetail.json
-    public static SignDetail toDetail(String name, String description, String url){
+    public static SignDetail toDetail(Sign sign){
         return SignDetail.builder()
-                .name(name)
-                .description(description)
-                .url(url)
+                .name(sign.getName())
+                .description(sign.getDescription())
+                .url(sign.getUrl())
                 .build();
     }
 }
