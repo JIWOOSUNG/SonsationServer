@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 public class SignListItem {
     private String category;
-    private List<SignListDetail> items = new ArrayList<>();
+    private List<SignListDetail> items;
 
 
     // Category + Sign -> SignListItem

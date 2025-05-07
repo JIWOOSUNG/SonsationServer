@@ -1,9 +1,8 @@
 package com.webkit.sonsation_server.controller;
 
+import com.webkit.sonsation_server.code.ErrorCode;
 import com.webkit.sonsation_server.code.SuccessCode;
 import com.webkit.sonsation_server.mapper.SignDetail;
-import com.webkit.sonsation_server.mapper.SignListDetail;
-import com.webkit.sonsation_server.mapper.SignListItem;
 import com.webkit.sonsation_server.response.ApiResponse;
 import com.webkit.sonsation_server.service.SignService;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +30,7 @@ public class SignController {
                     listItems
             );
         } catch (Exception e) {
-            return ApiResponse.fail(ErrorCode.INTERNAL_SERVER_ERROR, e.getMessage());
+            return ApiResponse.fail(ErrorCode.SERVER_ERROR, e.getMessage());
         }
     }
 
@@ -42,7 +41,7 @@ public class SignController {
 
             return ApiResponse.success(SuccessCode.OK, signNames);
         } catch (Exception e) {
-            return ApiResponse.fail(ErrorCode.INTERNAL_SERVER_ERROR, e.getMessage());
+            return ApiResponse.fail(ErrorCode.SERVER_ERROR, e.getMessage());
         }
     }
 
@@ -55,7 +54,7 @@ public class SignController {
 
             return ApiResponse.success(SuccessCode.OK, signDetail);
         } catch (Exception e) {
-            return ApiResponse.fail(ErrorCode.INTERNAL_SERVER_ERROR, e.getMessage());
+            return ApiResponse.fail(ErrorCode.SERVER_ERROR, e.getMessage());
         }
     }
 }
