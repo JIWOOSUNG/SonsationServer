@@ -1,5 +1,6 @@
 package com.webkit.sonsation_server.service;
 
+import com.webkit.sonsation_server.mapper.QuizListItem;
 import com.webkit.sonsation_server.mapper.SignDetail;
 import com.webkit.sonsation_server.mapper.SignListDetail;
 import com.webkit.sonsation_server.mapper.SignListItem;
@@ -43,8 +44,8 @@ public class SignService {
         ).toList();
     }
 
-    public List<String> getAllSignNames() {
-        return signRepository.findAllNames();
+    public List<QuizListItem> getQuizItems() {
+        return signRepository.getQuizItems();
     }
 
     public SignDetail getSign(Long id) {

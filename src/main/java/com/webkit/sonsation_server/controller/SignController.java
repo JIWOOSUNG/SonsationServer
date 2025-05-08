@@ -2,6 +2,7 @@ package com.webkit.sonsation_server.controller;
 
 import com.webkit.sonsation_server.code.ErrorCode;
 import com.webkit.sonsation_server.code.SuccessCode;
+import com.webkit.sonsation_server.mapper.QuizListItem;
 import com.webkit.sonsation_server.mapper.SignDetail;
 import com.webkit.sonsation_server.response.ApiResponse;
 import com.webkit.sonsation_server.service.SignService;
@@ -36,11 +37,11 @@ public class SignController {
     }
 
     @GetMapping("/name")
-    public ApiResponse<List<String>> getAllSignNames(){
+    public ApiResponse<List<QuizListItem>> getAllSignNames(){
         try {
-            List<String> signNames = signService.getAllSignNames();
+            List<QuizListItem> quizItemList = signService.getQuizItems();
 
-            return ApiResponse.success(SuccessCode.OK, signNames);
+            return ApiResponse.success(SuccessCode.OK, quizItemList);
         } catch (Exception e) {
             return ApiResponse.fail(ErrorCode.SERVER_ERROR, e.getMessage());
         }
