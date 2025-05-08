@@ -7,13 +7,11 @@ import com.webkit.sonsation_server.model.Category;
 import com.webkit.sonsation_server.model.Sign;
 import com.webkit.sonsation_server.repository.CategoryRepository;
 import com.webkit.sonsation_server.repository.SignRepository;
-import com.webkit.sonsation_server.response.ApiResponse;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
