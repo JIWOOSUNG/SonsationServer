@@ -1,15 +1,14 @@
 package com.webkit.sonsation_server.response;
 
 import com.webkit.sonsation_server.code.ErrorCode;
+import com.webkit.sonsation_server.code.ErrorData;
 import com.webkit.sonsation_server.code.SuccessCode;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
-@Data
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -26,6 +25,17 @@ public class ApiResponse<T> {
                 .build();
     }
 
+    @SuppressWarnings("unchecked")
+    public static <T> ApiResponse<T> fail(ErrorCode code, String detail) {
+        ErrorData errorData = new ErrorData(code, detail);
+        return (ApiResponse<T>) ApiResponse.<ErrorData>builder()
+                .success(false)
+                .code(code.getCode())
+                .data(errorData)
+                .build();
+    }
+
+    /*
     public static <T> ApiResponse<T> fail(ErrorCode code, String detailMessage) {
         Map<String, String> errorData = new HashMap<>();
         errorData.put("message", code.getMessage() + (detailMessage != null ? ": " + detailMessage : ""));
@@ -36,6 +46,7 @@ public class ApiResponse<T> {
                 .data((T) errorData)
                 .build();
     }
+    */
 }
 
 
